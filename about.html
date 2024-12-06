@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIZY LAPS - About Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0cdaf5;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header h1 {
+            float: left;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            float: right;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        .about {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .team {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            text-align: center;
+            margin: 10px;
+        }
+
+        .team-member img {
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .testimonials {
+            background: #eee;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .testimonials h3 {
+            text-align: center;
+        }
+
+        .faq {
+            margin: 20px 0;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+        }
+
+        .back-to-top:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>BIZY LAPS</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="about">
+            <h2>About Us</h2>
+            <p>We are dedicated to providing high-quality laptops for every need.</p>
+            <p>Our team is passionate about technology and strives to offer the best products and services.</p>
+        </section>
+
+        <section class="team">
+            <h3>Meet Our Team</h3>
+            <div class="team-member">
+                <img src="images/222.jpg" alt="Team Member 1">
+                <h4>BISMARK TETTEH</h4>
+                <p>Co-founder & CEO</p>
+            </div>
+            <div class="team-member">
+                <img src="images/1111.jpg" alt="Team Member 2">
+                <h4>PROF ERICUS</h4>
+                <p>Chief Technology Officer</p>
+            </div>
+            <div class="team-member">
+                <img src="images/1685943320882.jpg" alt="Team Member 3">
+                <h4>MICH TETTEH</h4>
+                <p>Marketing Specialist</p>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h3>What Our Customers Say</h3>
+            <p>The best laptop store I have ever experienced! - Prince</p>
+            <p>Amazing customer service and fantastic products! - Daniel</p>
+        </section>
+
+        <section class="faq">
+            <h3>Frequently Asked Questions</h3>
+            <p><strong>1. What types of laptops do you sell?</strong></p>
+            <p>We offer a wide range of laptops, from budget-friendly options to high-performance models.</p>
+            <p><strong>2. Do you offer warranties?</strong></p>
+            <p>Yes, all our laptops come with a manufacturer's warranty.</p>
+        </section>
+    </main>
+
+    <div class="back-to-top" id="backToTop">Back to Top</div>
+
+    <footer>
+        <p>&copy; 2024 Bizy Laps. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        backToTopButton.onclick = function() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        };
+    </script>
+</body>
+</html>

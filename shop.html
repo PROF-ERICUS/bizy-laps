@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIZY LAPS - Shop</title>
+    <style>
+        /* Common CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            float: left;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            float: right;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .filter {
+            margin: 20px 0;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 48%;
+            margin: 1%;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product-card button:hover {
+            background-color: #4cae4c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+        }
+
+        .modal-content input {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>BIZY LAPS</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h2>Shop Our Laptops</h2>
+        <div class="filter">
+            <label for="price-range">Price Range:</label>
+            <input type="range" id="price-range" min="0" max="2000" step="100" value="2000" oninput="updatePriceValue(this.value)">
+            <span id="price-value">$2000</span>
+        </div>
+        <input type="text" id="search" placeholder="Search laptops...">
+        <div class="product-grid" id="product-grid">
+            <div class="product-card" data-price="999">
+                <img src="images/lap 1.jpg" alt="Laptop 1">
+                <h4>Model A</h4>
+                <p>$999</p>
+                <button onclick="addToCart('Model A', 999)">Add to Cart</button>
+            </div>
+            <div class="product-card" data-price="899">
+                <img src="images/lap 2.jpg" alt="Laptop 2">
+                <h4>Model B</h4>
+                <p>$899</p>
+                <button onclick="addToCart('Model B', 899)">Add to Cart</button>
+            </div>
+            <div class="product-card" data-price="749">
+                <img src="images/lap 3.jpg" alt="Laptop 3">
+                <h4>Model C</h4>
+                <p>$749</p>
+                <button onclick="addToCart('Model C', 749)">Add to Cart</button>
+            </div>
+            <div class="product-card" data-price="1199">
+                <img src="images/lap 4.jpg" alt="Laptop 4">
+                <h4>Model D</h4>
+                <p>$1199</p>
+                <button onclick="addToCart('Model D', 1199)">Add to Cart</button>
+            </div>
+            <div class="product-card" data-price="649">
+                <img src="images/lap 5.jpg" alt="Laptop 5">
+                <h4>Model E</h4>
+                <p>$649</p>
+                <button onclick="addToCart('Model E', 649)">Add to Cart</button>
+            </div>
+            <div class="product-card" data-price="849">
+                <img src="images/lap 7.jpg" alt="Laptop 6">
+                <h4>Model F</h4>
+                <p>$849</p>
+                <button onclick="addToCart('Model F', 849)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Cart Display -->
+        <div id="cart">
+            <h3>Cart</h3>
+            <div id="cart-items"></div>
+            <div id="cart-total"></div>
+            <button onclick="placeOrder()">Place Order</button>
+        </div>
+
+        <!-- User Information Modal -->
+        <div id="userModal" class="modal">
+            <div class="modal-content">
+                <span onclick="closeModal()" style="cursor:pointer; float:right;">&times;</span>
+                <h2>Order Information</h2>
+                <input type="text" id="user-name" placeholder="Your Name" required>
+                <input type="email" id="user-email" placeholder="Your Email" required>
+                <input type="text" id="user-location" placeholder="Your Location" required>
+                <input type="text" id="mtn-number" placeholder="MTN Number (e.g., 0241234567)" required>
+                <div class="error" id="mtn-error">Please enter a valid MTN number with the correct prefix.</div>
+                <button onclick="submitOrder()">Submit Order</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Bizy Laps. All rights reserved.</p>
+    </footer>
+    <script>
+        // Array to hold the items in the cart
+        let cart = [];
+
+        // Add to cart function
+        function addToCart(model, price) {
+            // Check if the item already exists in the cart
+            const existingItem = cart.find(item => item.model === model);
+            if (existingItem) {
+                alert(`${model} is already in your cart.`);
+            } else {
+                cart.push({ model, price });
+                alert(`${model} has been added to your cart at $${price}!`);
+                updateCartDisplay();
+            }
+        }
+
+        // Function to update the cart display
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = ''; // Clear current cart display
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('cart-total').innerHTML = '';
+                return;
+            }
+
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `
+                    ${item.model}: $${item.price} 
+                    <button onclick="removeFromCart(${index})">Remove</button>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+                totalPrice += item.price;
+            });
+
+            document.getElementById('cart-total').innerHTML = `Total: $${totalPrice}`;
+        }
+
+        // Remove from cart function
+        function removeFromCart(index) {
+            cart.splice(index, 1); // Remove the item from the cart
+            updateCartDisplay(); // Update the cart display
+        }
+
+        // Function to place an order
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('Your cart is empty! Please add items to your cart before placing an order.');
+                return;
+            }
+            document.getElementById('userModal').style.display = 'block';
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById('userModal').style.display = 'none';
+        }
+
+        // Validate MTN number and submit order
+        function submitOrder() {
+            const mtnNumber = document.getElementById('mtn-number').value;
+            const mtnError = document.getElementById('mtn-error');
+
+            // Check if the MTN number is valid (10 digits and correct prefix)
+            const validPrefixes = ['024', '054', '059' ,'055'];
+            const isValidNumber = /^\d{10}$/.test(mtnNumber);
+            const hasValidPrefix = validPrefixes.some(prefix => mtnNumber.startsWith(prefix));
+
+            if (!isValidNumber || !hasValidPrefix) {
+                mtnError.style.display = 'block';
+                return;
+            } else {
+                mtnError.style.display = 'none';
+            }
+
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const location = document.getElementById('user-location').value;
+
+            let orderDetails = `Order Summary:\n\nName: ${name}\nEmail: ${email}\nLocation: ${location}\nMTN Number: ${mtnNumber}\n\nYou have ordered the following items:\n`;
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                orderDetails += `${item.model}: $${item.price}\n`;
+                totalPrice += item.price;
+            });
+
+            orderDetails += `Total Price: $${totalPrice}\n\nThank you for your order!`;
+            alert(orderDetails);
+
+            // Clear the cart and close the modal after placing the order
+            cart = [];
+            updateCartDisplay();
+            closeModal();
+        }
+
+        // Update price value display
+        function updatePriceValue(value) {
+            document.getElementById('price-value').textContent = `$${value}`;
+        }
+    </script>
+</body>
+</html>

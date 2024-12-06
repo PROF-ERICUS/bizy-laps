@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIZY LAPS - Home</title>
+    <style>
+        /* Common CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url(images/tttt.jpg);
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            float: left;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            float: right;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        .hero {
+            background: #ccc;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .carousel-images {
+            display: none;
+        }
+
+        .carousel-images img {
+            width: 100%;
+        }
+
+        .carousel-images img.active {
+            display: block;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 48%;
+            margin: 1%;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .product-card button:hover {
+            background-color: #4cae4c;
+        }
+
+        .testimonials {
+            background: #eee;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>BIZY LAPS</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Find Your Perfect Laptop</h2>
+            <p>Explore a variety of laptops tailored for every need!</p>
+        </section>
+        <section class="carousel">
+            <div class="carousel-images">
+                <img src="images/lap 1.jpg" alt="Laptop 1" class="active">
+                <img src="images/lap 2.jpg" alt="Laptop 2">
+                <img src="images/lap 3.jpg" alt="Laptop 3">
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </section>
+        <section class="featured">
+            <h3>Featured Laptops</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="images/lap 1.jpg" alt="Laptop 1">
+                    <h4>Model A</h4>
+                    <p>$999</p>
+                    <button onclick="addToCart('Model A', 999)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/lap 2.jpg" alt="Laptop 2">
+                    <h4>Model B</h4>
+                    <p>$899</p>
+                    <button onclick="addToCart('Model B', 899)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/lap 3.jpg" alt="Laptop 3">
+                    <h4>Model C</h4>
+                    <p>$749</p>
+                    <button onclick="addToCart('Model C', 749)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/lap 4.jpg" alt="Laptop 4">
+                    <h4>Model D</h4>
+                    <p>$1199</p>
+                    <button onclick="addToCart('Model D', 1199)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h3>What Our Customers Say</h3>
+            <p>"Great service and high-quality laptops!" - Prof Ericus</p>
+            <p>"I love my new laptop!" - Eric Adams</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Bizy Laps. All rights reserved.</p>
+    </footer>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-images img');
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function addToCart(model, price) {
+            alert(`${model} has been added to your cart at $${price}!`);
+        }
+    </script>
+</body>
+</html>
